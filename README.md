@@ -1,4 +1,4 @@
-# 🛡️ Sistema Inteligente de Detección y Orquestación para Cortafuegos con Monitorización en Tiempo Real
+# Sistema Inteligente de Detección y Orquestación para Cortafuegos con Monitorización en Tiempo Real
 
 Repositorio oficial del sistema avanzado de seguridad de redes y orquestación de tráfico. Este proyecto implementa un entorno de pruebas completo capaz de simular tráfico legítimo y múltiples vectores de ataque orientados a canales encubiertos, utilizando un motor de análisis inteligente, un generador estructurado de eventos de seguridad y una pila moderna de observabilidad basada en Grafana y Loki.
 
@@ -18,13 +18,13 @@ Repositorio oficial del sistema avanzado de seguridad de redes y orquestación d
 
 ---
 
-## 🏗️ Arquitectura General
+## Arquitectura General
 
 El flujo de datos del sistema está diseñado como un pipeline cerrado de seguridad: el tráfico (tanto legítimo como malicioso) es evaluado por el cortafuegos. El orquestador procesa y analiza las métricas de comportamiento mediante modelos analíticos y ventanas temporales, generando alertas detalladas que se escriben en formato JSON, son indexadas por el agente de Loki y finalmente se exponen de forma visual en los paneles de Grafana.
 
 ---
 
-## 🧩 Componentes del Sistema
+## Componentes del Sistema
 
 ### 1. Generador de Tráfico Benigno
 * **Función:** Simula la actividad de red normal, regular y esperada de los usuarios legítimos dentro de la infraestructura.
@@ -63,7 +63,7 @@ El entorno integra simulaciones de cuatro tipos específicos de ataques orientad
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```text
 firewall-stegano-monitor/
