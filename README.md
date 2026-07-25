@@ -4,7 +4,7 @@ Repositorio oficial del sistema avanzado de seguridad de redes y orquestación d
 
 ---
 
-## 📑 Tabla de Contenidos
+## Tabla de Contenidos
 1. [Arquitectura General](#-arquitectura-general)
 2. [Componentes del Sistema](#-componentes-del-sistema)
    - [1. Generador de Tráfico Benigno](#1-generador-de-tráfico-benigno)
