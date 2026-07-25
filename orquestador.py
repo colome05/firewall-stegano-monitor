@@ -3,10 +3,6 @@ import random
 import subprocess
 import sys
 
-# =================================================================
-# 1. CONFIGURACIÓN DE ARCHIVOS
-# Asegúrate de que estos nombres coincidan con tus archivos reales
-# =================================================================
 SCRIPT_BENIGNO = "generador_benigno.py"
 
 SCRIPTS_MALWARE = [
@@ -19,7 +15,7 @@ SCRIPTS_MALWARE = [
 SCRIPT_FIREWALL = "detector_stegano_quic_mejorado3.py"
 
 # =================================================================
-# 2. MOTOR DEL ORQUESTADOR
+# MOTOR DEL ORQUESTADOR
 # =================================================================
 def iniciar_simulacion():
     print("="*70)
