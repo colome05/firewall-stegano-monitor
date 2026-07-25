@@ -18,11 +18,12 @@ Los scripts ofensivos buscan evadir los sistemas de detección inyectando el men
 
 ---
 
-## 🟢 2. Generador de Tráfico Benigno
+## 🟢 2. Generador de Tráfico Benigno (`generador_benigno.py`)
 
-El script `generador_benigno.py` actúa como la base de la simulación. 
-*   **Objetivo:** Su función es inyectar tráfico regular en la red para establecer un *baseline* (comportamiento normal).
-*   **Importancia:** Al ejecutarse con alta frecuencia (11 de cada 15 veces), proporciona al cortafuegos los datos necesarios para evitar falsos positivos y entender cómo se ve una red sana antes de que ocurra una exfiltración.
+Este script cumple un propósito fundamental, pero su rol cambia radicalmente dependiendo de la fase en la que se encuentre el sistema:
+
+*   **Fase de Entrenamiento Inicial (Offline):** Antes de arrancar el orquestador, este generador se utiliza para crear una captura inicial de tráfico 100% legítimo y libre de anomalías. El script `entrenador_ia.py` consume esta captura para entrenar la red neuronal LSTM por única vez, estableciendo la *baseline* matemática y el umbral estático de lo que se considera una red "sana"[cite: 7].
+*   **Fase de Simulación (En vivo):** Una vez que arranca el orquestador, el modelo de IA ya no aprende. Durante esta fase, el script benigno se ejecuta con alta frecuencia (11 de cada 15 ciclos)[cite: 5]. Su único objetivo aquí es generar "ruido de fondo" constante que simule la actividad diaria de los usuarios. Esto crea un entorno de red realista y saturado, indispensable para poner a prueba la capacidad de los ataques esteganográficos para camuflarse.
 
 ---
 
