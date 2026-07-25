@@ -4,31 +4,7 @@ Este repositorio contiene la implementación de un sistema avanzado de seguridad
 
 ---
 
-## 🏗️ 1. El Orquestador: El Motor de Simulación (El "Ejecutor Tonto")
-
-Es fundamental entender que **el orquestador (`orquestador.py`) es un componente completamente "tonto"**; no realiza ningún cálculo analítico, no lee paquetes y no inspecciona la red. Su única responsabilidad es coordinar la ejecución de los scripts de forma cíclica e ininterrumpida.
-
-El ciclo de vida que sigue el orquestador es estrictamente el siguiente:
-1.  **Tirada de Probabilidad:** Genera un número aleatorio del 1 al 15.
-2.  **Selección de Tráfico:** 
-    *   Si el número es entre 1 y 11 (probabilidad de 11/15), selecciona el script de tráfico benigno.
-    *   Si el número es 12, 13, 14 o 15 (probabilidad de 1/15 cada uno), selecciona uno de los cuatro scripts de malware (Ataques).
-3.  **Ejecución Ciega:** Utiliza `subprocess.run` para ejecutar el generador de tráfico elegido sin saber qué hace internamente.
-4.  **Espera de Volcado:** Pausa su ejecución durante 5 segundos para permitir que el generador termine de escribir el archivo `.pcap` en el disco.
-5.  **Lanzamiento del IDS:** Ejecuta el script del cortafuegos (`detector_stegano_quic_mejorado3.py`), delegándole todo el trabajo analítico.
-6.  **Enfriamiento:** Realiza una cuenta atrás de 30 segundos para estabilizar la red antes de iniciar el siguiente ciclo.
-
----
-
-## 🟢 2. Generador de Tráfico Benigno
-
-El script `generador_benigno.py` actúa como la base de la simulación. 
-*   **Objetivo:** Su función es inyectar tráfico regular en la red para establecer un *baseline* (comportamiento normal).
-*   **Importancia:** Al ejecutarse con alta frecuencia (11 de cada 15 veces), proporciona al cortafuegos los datos necesarios para evitar falsos positivos y entender cómo se ve una red sana antes de que ocurra una exfiltración.
-
----
-
-## 🔴 3. Los 4 Vectores de Ataque (Scripts Malignos)
+## 🔴 1. Los 4 Vectores de Ataque (Scripts Malignos)
 
 Los scripts ofensivos buscan evadir los sistemas de detección inyectando el mensaje "PolHackedYou:)" cifrado con Vernam y una clave precompartida. Todos los scripts inyectan el tráfico malicioso camuflado entre 500 paquetes de ruido ("chaff") por cada paquete portador de información.
 
@@ -42,7 +18,15 @@ Los scripts ofensivos buscan evadir los sistemas de detección inyectando el men
 
 ---
 
-## 🧠 4. El Cortafuegos / IDS (`detector_stegano_quic_mejorado3.py`)
+## 🟢 2. Generador de Tráfico Benigno
+
+El script `generador_benigno.py` actúa como la base de la simulación. 
+*   **Objetivo:** Su función es inyectar tráfico regular en la red para establecer un *baseline* (comportamiento normal).
+*   **Importancia:** Al ejecutarse con alta frecuencia (11 de cada 15 veces), proporciona al cortafuegos los datos necesarios para evitar falsos positivos y entender cómo se ve una red sana antes de que ocurra una exfiltración.
+
+---
+
+## 🧠 3. El Cortafuegos / IDS (`detector_stegano_quic_mejorado3.py`)
 
 A diferencia del orquestador, el firewall es el verdadero núcleo inteligente del proyecto. Extrae las cabeceras (IP de origen, flags, TOS, ID, TTL, puertos origen, tamaño del payload y tiempos absolutos) del archivo `captura_quic.pcap` y procesa los datos en dos hilos concurrentes:
 
@@ -58,6 +42,22 @@ Evalúa la red en su conjunto (sin fijarse en IPs específicas) analizando el fl
 *   Extrae características avanzadas de ventanas temporales de 30 paquetes: media, varianza, entropía del histograma, asimetría (skew) y curtosis.
 *   Si el error de reconstrucción (MSE) supera el umbral precalculado, infiere que hay un patrón rítmico artificial en los retardos (exfiltración por latencia o DDoS) y emite una advertencia global (`ADVERTENCIA`) sin identificar una IP específica (`0.0.0.0`).
 *   Genera visualmente el gráfico `reporte_lstm_ultimo.png` con la curva temporal y el umbral de alarma.
+
+---
+
+## 🏗️ 4. El Orquestador: El Motor de Simulación (El "Ejecutor Tonto")
+
+Es fundamental entender que **el orquestador (`orquestador.py`) es un componente completamente "tonto"**; no realiza ningún cálculo analítico, no lee paquetes y no inspecciona la red. Su única responsabilidad es coordinar la ejecución de los scripts de forma cíclica e ininterrumpida.
+
+El ciclo de vida que sigue el orquestador es estrictamente el siguiente:
+1.  **Tirada de Probabilidad:** Genera un número aleatorio del 1 al 15.
+2.  **Selección de Tráfico:** 
+    *   Si el número es entre 1 y 11 (probabilidad de 11/15), selecciona el script de tráfico benigno.
+    *   Si el número es 12, 13, 14 o 15 (probabilidad de 1/15 cada uno), selecciona uno de los cuatro scripts de malware (Ataques).
+3.  **Ejecución Ciega:** Utiliza `subprocess.run` para ejecutar el generador de tráfico elegido sin saber qué hace internamente.
+4.  **Espera de Volcado:** Pausa su ejecución durante 5 segundos para permitir que el generador termine de escribir el archivo `.pcap` en el disco.
+5.  **Lanzamiento del IDS:** Ejecuta el script del cortafuegos (`detector_stegano_quic_mejorado3.py`), delegándole todo el trabajo analítico.
+6.  **Enfriamiento:** Realiza una cuenta atrás de 30 segundos para estabilizar la red antes de iniciar el siguiente ciclo.
 
 ---
 
