@@ -91,8 +91,8 @@ El panel se alimenta de las siguientes consultas principales:
 *   **Captura de eventos del cortafuegos:**
 *   **Distribución de alertas por severidad:**
 
-### Ejemplo del Panel de Control
-A continuación se muestra un ejemplo del dashboard en vivo. En él se puede observar el balance de las alertas categorizadas y la tabla de auditoría estructurada con la extracción nativa de los campos JSON (`src_ip`, `severidad`, `descripcion`):
+### Panel de Control
+A continuación se muestra el dashboard en vivo. En él se puede observar el balance de las alertas categorizadas y la tabla de auditoría estructurada con la extracción nativa de los campos JSON (`src_ip`, `severidad`, `descripcion`):
 
 ![Ejemplo del Dashboard de Grafana](z_grafana_dashboard.png)
 
