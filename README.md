@@ -88,8 +88,8 @@ Para facilitar la auditoría en tiempo real y la respuesta ante incidentes, el s
 
 ### Consultas LogQL de Referencia
 El panel se alimenta de las siguientes consultas principales:
-*   **Captura de eventos del cortafuegos:** `{job="firewall_stegano"}`
-*   **Distribución de alertas por severidad:** `sum by (severidad) (count_over_time({job="firewall_stegano"}[$__range]))`
+*   **Captura de eventos del cortafuegos:**
+*   **Distribución de alertas por severidad:**
 
 ### Ejemplo del Panel de Control
 A continuación se muestra un ejemplo del dashboard en vivo. En él se puede observar el balance de las alertas categorizadas y la tabla de auditoría estructurada con la extracción nativa de los campos JSON (`src_ip`, `severidad`, `descripcion`):
