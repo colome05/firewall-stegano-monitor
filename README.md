@@ -1,10 +1,10 @@
-# 🛡️ Orquestador de Seguridad y Detección de Esteganografía en Redes
+# Orquestador de Seguridad y Detección de Esteganografía en Redes
 
 Este repositorio contiene la implementación de un sistema avanzado de seguridad en redes que simula un entorno continuo de "Blue Team vs Red Team". El proyecto coordina la generación de tráfico (legítimo y malicioso), analiza las capturas en busca de canales encubiertos mediante inteligencia artificial y entropía, y exporta alertas estructuradas para su monitorización en tiempo real.
 
 ---
 
-## 🔴 1. Los 4 Vectores de Ataque (Scripts Malignos)
+## 1. Los 4 Vectores de Ataque (Scripts Malignos)
 
 Los scripts ofensivos buscan evadir los sistemas de detección inyectando el mensaje "PolHackedYou:)" cifrado con Vernam y una clave precompartida. Todos los scripts inyectan el tráfico malicioso camuflado entre 500 paquetes de ruido ("chaff") por cada paquete portador de información.
 
@@ -18,7 +18,7 @@ Los scripts ofensivos buscan evadir los sistemas de detección inyectando el men
 
 ---
 
-## 🟢 2. Generador de Tráfico Benigno (`generador_benigno.py`)
+## 2. Generador de Tráfico Benigno (`generador_benigno.py`)
 
 Este script cumple un propósito fundamental, pero su rol cambia radicalmente dependiendo de la fase en la que se encuentre el sistema:
 
@@ -27,7 +27,7 @@ Este script cumple un propósito fundamental, pero su rol cambia radicalmente de
 
 ---
 
-## 🧠 3. El Cortafuegos / IDS (`detector_stegano_quic_mejorado3.py`)
+## 3. El Cortafuegos / IDS (`detector_stegano_quic_mejorado3.py`)
 
 A diferencia del orquestador, el firewall es el verdadero núcleo inteligente del proyecto. Extrae las cabeceras (IP de origen, flags, TOS, ID, TTL, puertos origen, tamaño del payload y tiempos absolutos) del archivo `captura_quic.pcap` y procesa los datos en dos hilos concurrentes:
 
@@ -46,7 +46,7 @@ Evalúa la red en su conjunto (sin fijarse en IPs específicas) analizando el fl
 
 ---
 
-## 🏗️ 4. El Orquestador: El Motor de Simulación (El "Ejecutor Tonto")
+## 4. El Orquestador: El Motor de Simulación (El "Ejecutor Tonto")
 
 Es fundamental entender que **el orquestador (`orquestador.py`) es un componente completamente "tonto"**; no realiza ningún cálculo analítico, no lee paquetes y no inspecciona la red. Su única responsabilidad es coordinar la ejecución de los scripts de forma cíclica e ininterrumpida.
 
@@ -62,7 +62,7 @@ El ciclo de vida que sigue el orquestador es estrictamente el siguiente:
 
 ---
 
-## 📝 5. Generador de Logs Estructurados (JSON)
+## 5. Generador de Logs Estructurados (JSON)
 
 Cuando el Cortafuegos detecta una intrusión (ya sea por entropía o por LSTM), invoca la función `enviar_alerta_wazuh` para estructurar la salida.
 *   **Ruta de destino:** Los eventos se agregan en formato JSON al archivo local `C:\logs_firewall\alertas.json`.
@@ -75,14 +75,14 @@ Cuando el Cortafuegos detecta una intrusión (ya sea por entropía o por LSTM), 
 
 ---
 
-## 📊 6. Pila de Observabilidad (Loki / Grafana)
+## 6. Pila de Observabilidad (Loki / Grafana)
 
 El archivo `alertas.json` sirve como puente de comunicación hacia la pila de monitorización:
 *   **Grafana Alloy:** Un agente en segundo plano monitoriza constantemente el archivo de texto. Al detectar nuevas líneas, extrae las etiquetas (como la severidad) y reenvía el flujo de logs hacia la base de datos de telemetría.
 
 ---
 
-## 📸 7. Monitorización Visual (Dashboard de Grafana)
+## 7. Monitorización Visual (Dashboard de Grafana)
 
 Para facilitar la auditoría en tiempo real y la respuesta ante incidentes, el sistema cuenta con un panel de control operativo en Grafana que consume directamente los datos indexados por Loki. 
 
