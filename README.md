@@ -94,7 +94,7 @@ El panel se alimenta de las siguientes consultas principales:
 ### Ejemplo del Panel de Control
 A continuación se muestra un ejemplo del dashboard en vivo. En él se puede observar el balance porcentual de las alertas categorizadas (Gráfico de Tarta) y la tabla de auditoría estructurada con la extracción nativa de los campos JSON (`src_ip`, `severidad`, `descripcion`):
 
-![Ejemplo del Dashboard de Grafana](ruta/a/tu/imagen/grafana_dashboard.png)
+![Ejemplo del Dashboard de Grafana](z_grafana_dashboard.png)
 
 *(Nota: El sistema está diseñado para que los analistas puedan identificar de un vistazo las IPs bloqueadas por el Motor Espacial o las advertencias globales emitidas por el Motor IA).*
 *   **Grafana Loki:** Almacena e indexa estos logs estructurados de forma altamente eficiente.
