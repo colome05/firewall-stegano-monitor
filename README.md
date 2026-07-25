@@ -79,5 +79,23 @@ Cuando el Cortafuegos detecta una intrusión (ya sea por entropía o por LSTM), 
 
 El archivo `alertas.json` sirve como puente de comunicación hacia la pila de monitorización:
 *   **Grafana Alloy:** Un agente en segundo plano monitoriza constantemente el archivo de texto. Al detectar nuevas líneas, extrae las etiquetas (como la severidad) y reenvía el flujo de logs hacia la base de datos de telemetría.
+
+---
+
+## 📸 7. Monitorización Visual (Dashboard de Grafana)
+
+Para facilitar la auditoría en tiempo real y la respuesta ante incidentes, el sistema cuenta con un panel de control operativo en Grafana que consume directamente los datos indexados por Loki. 
+
+### Consultas LogQL de Referencia
+El panel se alimenta de las siguientes consultas principales:
+*   **Captura de eventos del cortafuegos:** `{job="firewall_stegano"}`
+*   **Distribución de alertas por severidad:** `sum by (severidad) (count_over_time({job="firewall_stegano"}[$__range]))`
+
+### Ejemplo del Panel de Control
+A continuación se muestra un ejemplo del dashboard en vivo. En él se puede observar el balance porcentual de las alertas categorizadas (Gráfico de Tarta) y la tabla de auditoría estructurada con la extracción nativa de los campos JSON (`src_ip`, `severidad`, `descripcion`):
+
+![Ejemplo del Dashboard de Grafana](ruta/a/tu/imagen/grafana_dashboard.png)
+
+*(Nota: El sistema está diseñado para que los analistas puedan identificar de un vistazo las IPs bloqueadas por el Motor Espacial o las advertencias globales emitidas por el Motor IA).*
 *   **Grafana Loki:** Almacena e indexa estos logs estructurados de forma altamente eficiente.
 *   **Paneles de Grafana:** Consumen los datos de Loki para generar gráficos de tarta (basados en las llaves `severidad` del JSON) y tablas de auditoría en tiempo real donde los analistas pueden revisar de un vistazo las IPs bloqueadas (`src_ip`) y las anomalías de entropía (`descripcion`).
