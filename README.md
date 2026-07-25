@@ -98,4 +98,4 @@ A continuación se muestra un ejemplo del dashboard en vivo. En él se puede obs
 
 *(Nota: El sistema está diseñado para que los analistas puedan identificar de un vistazo las IPs bloqueadas por el Motor Espacial o las advertencias globales emitidas por el Motor IA).*
 *   **Grafana Loki:** Almacena e indexa estos logs estructurados de forma altamente eficiente.
-*   **Paneles de Grafana:** Consumen los datos de Loki para generar gráficos de tarta (basados en las llaves `severidad` del JSON) y tablas de auditoría en tiempo real donde los analistas pueden revisar de un vistazo las IPs bloqueadas (`src_ip`) y las anomalías de entropía (`descripcion`).
+*   **Paneles de Grafana:** Consumen los datos de Loki para generar gráficos (basados en las llaves `severidad` del JSON) y tablas de auditoría en tiempo real donde los analistas pueden revisar de un vistazo las IPs bloqueadas (`src_ip`) y las anomalías de entropía (`descripcion`).
