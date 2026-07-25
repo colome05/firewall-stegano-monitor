@@ -13,7 +13,7 @@ Los scripts ofensivos buscan evadir los sistemas de detección inyectando el men
 | Característica | Capa 3 (`inyector_capa3_ip.py`) | Capa 4 Retardos (`inyector_capa4_ipat.py`) | Capa 4 Puertos (`inyector_capa4_puertos.py`) | Capa 7 (`inyector_capa7_payload.py`) |
 | :--- | :--- | :--- | :--- | :--- |
 | **Mecanismo** | Altera los campos de la cabecera IP. | Altera el tiempo de llegada entre paquetes (IPAT). | Altera el puerto de origen UDP. | Altera la longitud del paquete UDP. |
-| **Ocultación del Byte** | 1 bit a `Flags`, 3 bits a `TOS`, 2 bits a `TTL`, 2 bits a `IP ID`. | El retardo es `0.050 + (byte * 0.001)` segundos. | Se integra en el puerto usando `(prefix << 8) | byte`. | El tamaño del payload es `1000 + byte`. |
+| **Ocultación del Byte** | 1 bit a `Flags`, 3 bits a `TOS`, 2 bits a `TTL`, 2 bits a `IP ID`. | El retardo es `0.050 + (byte * 0.001)` segundos. | Se integra en el puerto usando `(prefix << 8) &#124; byte`. | El tamaño del payload es `1000 + byte`. |
 | **Decodificación** | Ensamblaje binario de los múltiples campos IP leídos. | Resta del tiempo absoluto entre paquetes secuenciales. | Aplicación de máscara AND (`0xFF`) sobre el puerto. | Cálculo de la longitud de la capa `Raw` menos 1000. |
 
 ---
