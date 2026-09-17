@@ -65,7 +65,6 @@ def generar_pcap():
             pkt = IP(src=IP_ESTEGANO, dst=IP_DESTINO, tos=0, ttl=64, id=base_id, flags="DF") / \
                   UDP(sport=puerto_origen_fijo, dport=443) / Raw(os.urandom(1200))
         else:
-            # Ruido con retraso constante y estático
             retraso = 0.010
             t += retraso
 
