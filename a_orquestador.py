@@ -12,7 +12,7 @@ SCRIPTS_MALWARE = [
     "inyector_capa7_payload.py"
 ]
 
-SCRIPT_FIREWALL = "detector_stegano_quic_mejorado3.py"
+SCRIPT_FIREWALL = "detector_canales_encubiertos_hibrido.py"
 
 # =================================================================
 # MOTOR DEL ORQUESTADOR
